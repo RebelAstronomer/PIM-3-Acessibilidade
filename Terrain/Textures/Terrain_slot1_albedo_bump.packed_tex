@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://materials/Gravel023_1K-JPG/Gravel023_1K_Displacement.jpg",
+		"rgb": "res://materials/Gravel023_1K-JPG/Gravel023_1K_Color.jpg"
+	}
+}
