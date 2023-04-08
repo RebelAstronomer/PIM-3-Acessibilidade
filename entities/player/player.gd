@@ -21,6 +21,7 @@ onready var HEAD: Spatial = $Head
 onready var CAMERA: Camera = $Head/PlayerCamera/Camera
 onready var RAYCAST: RayCast = $Head/interactCast
 onready var STATE_MACHINE: StateMachine = $StateMachine
+onready var STAMINA_TIMER: Timer = $StaminaCountDown
 
 # VARIAVEIS #
 var LOOK_ROT: Vector3 = Vector3.ZERO
@@ -31,6 +32,7 @@ var MIN_ANGLE: float = -80
 var IS_RUNNING: bool = false
 var IS_TIRED: bool = false
 var IS_INTERACTING: bool = false
+var CAN_RUN: bool = true
 var SPEED: float
 
 func _process(delta):
@@ -43,8 +45,13 @@ func _input(event):
 	if Input.is_action_just_pressed("quit_game"):
 		get_tree().quit()
 	
+	# Tremendo a camera
 	if Input.is_action_just_pressed("shake_camera"):
 		emit_signal("player_hitted")
+	
+	# Resetando a cena
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
 	
 	# Pegando a direção do mouse
 	if event is InputEventMouseMotion:
@@ -54,7 +61,6 @@ func _input(event):
 
 # Movimentação do jogador
 func player_movimentation(_delta: float):
-	
 	# Rotacionando a camera
 	player_look_throw_the_mouse()
 	
@@ -67,7 +73,7 @@ func player_movimentation(_delta: float):
 		VELOCITY.y -= GRAVITY * _delta
 	# Pular
 	elif Input.is_action_just_pressed("jumping") and not IS_RUNNING:
-		VELOCITY.y = JUMP_FORCE 
+		STATE_MACHINE.change_state("OnAir")
 	
 	# Direção da movimentação
 	DIRECTION = Vector3(

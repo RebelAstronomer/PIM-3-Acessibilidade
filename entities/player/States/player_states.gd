@@ -15,3 +15,4 @@ func _ready():
 	# Caso não tenha sido encontrado, o nodo sera desligado
 	# Evita bugs
 	assert(PLAYER != null)
+

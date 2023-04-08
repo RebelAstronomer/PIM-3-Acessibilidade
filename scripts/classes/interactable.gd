@@ -9,7 +9,9 @@ export var INTERACTION_TYPE: String = "Pickup"
 export var PROMPT_MESSAGE: String = "Interact"
 export var PROMPT_ACTION  = "interact"
 
-#
+var IS_INTERACTABLE: bool = true
+
+# Mostrando ação do item
 func get_prompt():
 	var keyName = ""
 	for action in InputMap.get_action_list(PROMPT_ACTION):

@@ -13,14 +13,16 @@ func _physics_process(delta):
 		
 		# Checando se colidiu com algum item
 		if detected is Interactable:
-			PROMPT.text = detected.get_prompt()
 			
-			# Interagindo
-			match detected.INTERACTION_TYPE:
-				"Pickup":
-					if Input.is_action_just_pressed(detected.PROMPT_ACTION):
-						detected.interaction(owner)
-				"Long":
-					if Input.is_action_pressed(detected.PROMPT_ACTION):
-						detected.interaction(owner)
+			if detected.IS_INTERACTABLE == true:
+				PROMPT.text = detected.get_prompt()
+				
+				# Interagindo
+				match detected.INTERACTION_TYPE:
+					"Pickup":
+						if Input.is_action_just_pressed(detected.PROMPT_ACTION):
+							detected.interaction(owner)
+					"Long":
+						if Input.is_action_pressed(detected.PROMPT_ACTION):
+							detected.interaction(owner)
 		
