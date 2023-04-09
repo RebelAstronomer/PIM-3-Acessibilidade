@@ -2,12 +2,11 @@ extends KinematicBody
 class_name Player
 
 # STATUS #
-export var SPEED_WALKING: float = 10
-export var SPEED_RUN: float = 20
-export var SPEED_TIRED: float = 5
-export var STAMINA: float = 100
-export var STAMINA_REGEN: float = 0.4
-export var MAX_STAMINA: float = 100
+export var SPEED_WALKING: float = 7
+export var SPEED_RUN: float = 15
+export var SPEED_TIRED: float = 3
+export var STAMINA_REGEN: float = 0.6
+export var MAX_STAMINA: float = 200
 export var ACCEL: float = 10
 export var JUMP_FORCE: float = 15
 export var GRAVITY: float = 50
@@ -22,11 +21,13 @@ onready var CAMERA: Camera = $Head/PlayerCamera/Camera
 onready var RAYCAST: RayCast = $Head/interactCast
 onready var STATE_MACHINE: StateMachine = $StateMachine
 onready var STAMINA_TIMER: Timer = $StaminaCountDown
+onready var HUD: Control = $HUD
 
 # VARIAVEIS #
 var LOOK_ROT: Vector3 = Vector3.ZERO
 var DIRECTION: Vector3 = Vector3.ZERO
 var VELOCITY: Vector3 = Vector3.ZERO
+var STAMINA: float = MAX_STAMINA
 var MAX_ANGLE: float = 90
 var MIN_ANGLE: float = -80
 var IS_RUNNING: bool = false
@@ -34,6 +35,14 @@ var IS_TIRED: bool = false
 var IS_INTERACTING: bool = false
 var CAN_RUN: bool = true
 var SPEED: float
+var ACT_STATE: String
+var INTERACT_WITH
+
+var SHOW_MOUSE: bool = false
+
+func _ready():
+	# Desabilitando o mouse na tela
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta):
 	# Limitadores #
@@ -53,6 +62,15 @@ func _input(event):
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 	
+	# Mostrando o mouse
+	if Input.is_action_just_pressed("show_mouse"):
+		SHOW_MOUSE = !SHOW_MOUSE
+	
+	if SHOW_MOUSE == true:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 	# Pegando a direção do mouse
 	if event is InputEventMouseMotion:
 		LOOK_ROT.x -= (event.relative.y * MOUSE_SENSI)
@@ -71,8 +89,9 @@ func player_movimentation(_delta: float):
 	# Grvidade
 	if not is_on_floor():
 		VELOCITY.y -= GRAVITY * _delta
+	
 	# Pular
-	elif Input.is_action_just_pressed("jumping") and not IS_RUNNING:
+	if Input.is_action_just_pressed("jumping") and not IS_RUNNING and is_on_floor():
 		STATE_MACHINE.change_state("OnAir")
 	
 	# Direção da movimentação

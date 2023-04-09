@@ -15,7 +15,7 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" type="Script" id=13]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Terrain/data.hterrain" type="Resource" id=15]
-[ext_resource path="res://items/page.tscn" type="PackedScene" id=16]
+[ext_resource path="res://items/Pages/page.tscn" type="PackedScene" id=16]
 [ext_resource path="res://items/lever.tscn" type="PackedScene" id=17]
 [ext_resource path="res://objects/door_open_lever.tscn" type="PackedScene" id=18]
 [ext_resource path="res://objects/door_open_interact.tscn" type="PackedScene" id=19]
@@ -107,6 +107,16 @@ shape = SubResource( 5 )
 
 [node name="page" parent="Table" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32301, 1.4831, -0.0275993 )
+TEXT = "HOJE É DOMINGOOOOOO!
+PÉ DE CACHIMBO
+CACHIMBO É DE OURO
+BATE NO TORO
+O TORO É VALENTE
+BATE NA GENTE
+A GENTE É FRACO
+CAI NO BURACO
+O BURACO É FUNDO
+CABO SEU MUNDOOOOOO!"
 
 [node name="lever" parent="Table" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35999, 1.60706, 0.151402 )

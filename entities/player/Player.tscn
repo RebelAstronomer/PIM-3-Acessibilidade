@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/classes/state_machine.gd" type="Script" id=2]
@@ -11,11 +11,44 @@
 [ext_resource path="res://entities/player/States/player_interacting.gd" type="Script" id=9]
 [ext_resource path="res://entities/player/States/player_onAir.gd" type="Script" id=10]
 [ext_resource path="res://entities/player/lanter.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/player/player_lanter.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
 
 [sub_resource type="SphereShape" id=3]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.369361, -0.732229, -1.35696 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walking_shake"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.369361, -0.732229, -1.35696 ), Vector3( 0.369361, -0.889528, -1.35696 ), Vector3( 0.369361, -0.732229, -1.35696 ) ]
+}
 
 [sub_resource type="CapsuleMesh" id=2]
 mid_height = 2.0
@@ -45,8 +78,16 @@ TRAUMA_AMMOUNT = 1.0
 [node name="CollisionShape" type="CollisionShape" parent="Head/trauma_area"]
 shape = SubResource( 3 )
 
-[node name="lanter" parent="Head" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.821365, -0.732229, -1.35696 )
+[node name="lanter_pos" type="Position3D" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.369361, -0.732229, -1.35696 )
+script = ExtResource( 12 )
+
+[node name="lanter" parent="Head/lanter_pos" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/lanter_pos"]
+anims/RESET = SubResource( 4 )
+anims/walking_shake = SubResource( 5 )
 
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.99392, 0 )

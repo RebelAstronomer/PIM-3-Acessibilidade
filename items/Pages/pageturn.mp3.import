@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pageturn.mp3-9f52ec20959c4907df3b0d5d307a918a.mp3str"
+
+[deps]
+
+source_file="res://items/Pages/pageturn.mp3"
+dest_files=[ "res://.import/pageturn.mp3-9f52ec20959c4907df3b0d5d307a918a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

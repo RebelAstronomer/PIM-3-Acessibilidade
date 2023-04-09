@@ -3,8 +3,7 @@ extends PlayerState
 var CAN_REGEN: bool = false
 
 func _enter(msg := {}) -> void:
-	# Desabilitando o mouse na tela
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	PLAYER.ACT_STATE = self.name
 	# Definindo a velocidade inicial do jogador
 	PLAYER.SPEED = PLAYER.SPEED_WALKING
 

@@ -1,6 +1,7 @@
 extends PlayerState
 
 func _enter(msg := {}) -> void:
+	PLAYER.ACT_STATE = self.name
 	PLAYER.VELOCITY.y = PLAYER.JUMP_FORCE 
 
 func _physics_update(delta : float) -> void:

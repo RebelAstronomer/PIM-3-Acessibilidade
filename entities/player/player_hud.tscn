@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/player/player_gui.gd" type="Script" id=1]
+[ext_resource path="res://items/Pages/page_hud_texture.jpeg" type="Texture" id=2]
 
 [sub_resource type="Theme" id=3]
 
@@ -53,4 +54,37 @@ margin_top = -15.5
 margin_bottom = 15.5
 text = "Message
 {Key}"
+align = 1
+
+[node name="Page" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PageTexture" type="TextureRect" parent="Page"]
+anchor_left = 0.312
+anchor_right = 0.687
+anchor_bottom = 1.0
+margin_left = 0.511993
+margin_right = 0.511963
+texture = ExtResource( 2 )
+expand = true
+
+[node name="PageText" type="RichTextLabel" parent="Page"]
+anchor_left = 0.375
+anchor_top = 0.107
+anchor_right = 0.625
+anchor_bottom = 0.853
+margin_left = -3.05176e-05
+margin_top = -0.200005
+margin_bottom = 0.199982
+text = "Text"
+
+[node name="Label" type="Label" parent="Page"]
+anchor_top = 0.933
+anchor_right = 1.0
+anchor_bottom = 0.973
+margin_top = 0.200012
+margin_bottom = 0.199951
+text = "Aperte \"E\" para sair"
 align = 1
