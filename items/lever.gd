@@ -23,6 +23,7 @@ func action(body):
 	# Desativando a interação
 	INTERACT_AREA.IS_INTERACTABLE = false
 	
+	# Animando
 	ANIMATION.play("interact")
 
 func _on_interactive_body_interacted(body):

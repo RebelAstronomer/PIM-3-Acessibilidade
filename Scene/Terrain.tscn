@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://items/lever.tscn" type="PackedScene" id=17]
 [ext_resource path="res://objects/door_open_lever.tscn" type="PackedScene" id=18]
 [ext_resource path="res://objects/door_open_interact.tscn" type="PackedScene" id=19]
+[ext_resource path="res://objects/torch_wall/torch_wall.tscn" type="PackedScene" id=20]
+[ext_resource path="res://objects/torch_on_ground/torch_on_ground.tscn" type="PackedScene" id=21]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.184314, 0.176471, 0.309804, 1 )
@@ -40,7 +42,15 @@ ssao_light_affect = 1.0
 dof_blur_far_enabled = true
 dof_blur_far_distance = 233.59
 glow_enabled = true
-glow_bloom = 1.0
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/6 = true
+glow_levels/7 = true
+glow_intensity = 0.34
+glow_strength = 1.06
+glow_bloom = 0.04
+glow_blend_mode = 0
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 1 )
@@ -106,7 +116,7 @@ mesh = SubResource( 4 )
 shape = SubResource( 5 )
 
 [node name="page" parent="Table" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32301, 1.4831, -0.0275993 )
+transform = Transform( 0.898442, 0, 0.439093, 0, 1, 0, -0.439093, 0, 0.898442, -1.32301, 1.4831, -0.0276031 )
 TEXT = "HOJE É DOMINGOOOOOO!
 PÉ DE CACHIMBO
 CACHIMBO É DE OURO
@@ -131,3 +141,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 238, 28, 47 )
 
 [node name="door_open_lever2" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 232.007, 28.3045, 47.0519 )
+
+[node name="torch_wall" parent="." instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 238.277, 29.4737, 53.5943 )
+
+[node name="torch_on_ground" parent="." instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 244.231, 30.5329, 73.0895 )

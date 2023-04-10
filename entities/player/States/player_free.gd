@@ -7,6 +7,9 @@ func _enter(msg := {}) -> void:
 	# Definindo a velocidade inicial do jogador
 	PLAYER.SPEED = PLAYER.SPEED_WALKING
 
+func _handle_input(_event: InputEvent) -> void:
+	PLAYER.player_mouse_input(_event)
+
 func _physics_update(delta: float) -> void:
 	# Checando se pode correr
 	if Input.is_action_pressed("run") and PLAYER.IS_TIRED == false and PLAYER.CAN_RUN == true:

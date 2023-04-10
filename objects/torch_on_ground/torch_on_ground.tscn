@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://particles/fire/torch_fire.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/torch_wall/torch.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pira/OmniLight:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.803 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "glow"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pira/OmniLight:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 10.7866, 9.0, 10.7866 ]
+}
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.1, 0.1, 4 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0.737255, 0.282353, 1 )
+
+[sub_resource type="CylinderMesh" id=5]
+bottom_radius = 0.0
+height = 0.5
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 0.074, 1.94, 0.065 )
+
+[node name="torch_on_ground" type="Spatial"]
+script = ExtResource( 2 )
+ANIMATION_SPEED = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "glow"
+anims/RESET = SubResource( 6 )
+anims/glow = SubResource( 7 )
+
+[node name="body" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.0155, 0 )
+mesh = SubResource( 3 )
+skeleton = NodePath("")
+material/0 = SubResource( 4 )
+
+[node name="pira" type="MeshInstance" parent="."]
+transform = Transform( 0.169328, 0, 0, 0, 0.50194, 0, 0, 0, 0.168692, 0, 3.89303, 0 )
+mesh = SubResource( 5 )
+skeleton = NodePath("")
+
+[node name="torch_fire" parent="pira" instance=ExtResource( 1 )]
+transform = Transform( 2.74456, 0, 0, 0, 0.935745, 0, 0, 0, 2.75491, 0, 0.214504, -0.136012 )
+
+[node name="OmniLight" type="OmniLight" parent="pira"]
+transform = Transform( 5.9057, 0, 0, 0, 1.99227, 0, 0, 0, 5.92796, 0, 0.191941, -0.287483 )
+light_color = Color( 1, 0.870588, 0.643137, 1 )
+omni_range = 2.803
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95405, 0 )
+shape = SubResource( 8 )

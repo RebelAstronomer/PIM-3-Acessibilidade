@@ -70,12 +70,7 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# Pegando a direção do mouse
-	if event is InputEventMouseMotion:
-		LOOK_ROT.x -= (event.relative.y * MOUSE_SENSI)
-		LOOK_ROT.y -= (event.relative.x * MOUSE_SENSI)
-		LOOK_ROT.x = clamp(LOOK_ROT.x, MIN_ANGLE, MAX_ANGLE)
+
 
 # Movimentação do jogador
 func player_movimentation(_delta: float):
@@ -113,6 +108,13 @@ func player_look_throw_the_mouse():
 	 # Girando a cabeça de acordo com a direção do mouse
 	HEAD.rotation_degrees.x = LOOK_ROT.x
 	rotation_degrees.y = LOOK_ROT.y
+
+func player_mouse_input(event):
+	# Pegando a direção do mouse
+	if event is InputEventMouseMotion:
+		LOOK_ROT.x -= (event.relative.y * MOUSE_SENSI)
+		LOOK_ROT.y -= (event.relative.x * MOUSE_SENSI)
+		LOOK_ROT.x = clamp(LOOK_ROT.x, MIN_ANGLE, MAX_ANGLE)
 
 # Função para checar dano
 func player_hitted():

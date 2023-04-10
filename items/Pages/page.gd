@@ -3,14 +3,14 @@ extends InteractableItem
 export(String, MULTILINE) var TEXT: String
 export(Texture) var PAGE_TEXT
 
-onready var AUDIO_STREAM: AudioStreamPlayer = $AudioStreamPlayer
-
 var PAGE_CTRL: Control = null
+
+func _ready():
+	 AUDIO_STREAM = $AudioStreamPlayer3D
 
 func action(body):
 	# Audio
-#	AUDIO_STREAM.stream = INIT_INTERACT_SOUND
-	AUDIO_STREAM.play()
+	play_audio(INIT_INTERACT_SOUND)
 	# Pegando o controlador
 	PAGE_CTRL = body.HUD.get_node("Page")
 	# Definindo a textura da página
@@ -29,8 +29,7 @@ func action(body):
 func end_interaction():
 	if PAGE_CTRL != null:
 		# Audio
-#		AUDIO_STREAM.stream = END_INTERACT_SOUND
-		AUDIO_STREAM.play()
+		play_audio(END_INTERACT_SOUND)
 		# Desabilitando a colisão do interactive_body
 		get_node("interactive_body/CollisionShape").disabled = true
 		# Iniciando contador
@@ -53,4 +52,3 @@ func _on_interactCooldown_timeout():
 
 func _on_AudioStreamPlayer_finished():
 	AUDIO_STREAM.stop()
-	print('parei')

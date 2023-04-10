@@ -9,6 +9,9 @@ func _enter(msg := {}):
 	# Resetando a velocidade
 	PLAYER.SPEED = PLAYER.SPEED_TIRED
 
+func _handle_input(_event: InputEvent) -> void:
+	PLAYER.player_mouse_input(_event)
+
 func _physics_update(delta: float) -> void:
 	# Checando se ainda está cansado
 	if PLAYER.IS_TIRED == true:

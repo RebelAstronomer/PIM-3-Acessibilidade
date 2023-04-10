@@ -22,7 +22,7 @@ func _ready():
 	STATE._enter()
 
 # Passando as informações dos inputs para o estado
-func _unhandled_input(event):
+func _input(event):
 	STATE._handle_input(event)
 
 # Passando as informações do process para o estado
