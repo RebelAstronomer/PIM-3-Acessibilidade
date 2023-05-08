@@ -43,6 +43,7 @@ var SHOW_MOUSE: bool = false
 func _ready():
 	# Desabilitando o mouse na tela
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Globals.PLAYER = self
 
 func _process(delta):
 	# Limitadores #
