@@ -1,10 +1,15 @@
 extends PlayerState
 
+onready var TIRED_SND = preload("res://entities/player/sounds/breath-female.wav")
+
 func _enter(msg := {}):
 	PLAYER.ACT_STATE = self.name
 	# Declarando que está cansado
 	PLAYER.IS_TIRED = true
 	PLAYER.IS_RUNNING = false
+	
+	# Som de cansada
+	PLAYER.set_audio_to_play(TIRED_SND,true)
 	
 	# Resetando a velocidade
 	PLAYER.SPEED = PLAYER.SPEED_TIRED

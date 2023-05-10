@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hitten_flesh (2).wav-5e1f812515f8e2e990a8e9219a8acf7b.sample"
+
+[deps]
+
+source_file="res://entities/player/sounds/hitten_flesh (2).wav"
+dest_files=[ "res://.import/hitten_flesh (2).wav-5e1f812515f8e2e990a8e9219a8acf7b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

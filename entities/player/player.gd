@@ -19,6 +19,7 @@ onready var RAYCAST: RayCast = $Head/interactCast
 onready var STATE_MACHINE: StateMachine = $StateMachine
 onready var STAMINA_TIMER: Timer = $StaminaCountDown
 onready var HUD: Control = $HUD
+onready var STREAM: AudioStreamPlayer3D = $Head/AudioStreamPlayer3D
 
 # VARIAVEIS #
 var LOOK_ROT: Vector3 = Vector3.ZERO
@@ -112,6 +113,22 @@ func player_mouse_input(event):
 		LOOK_ROT.y -= (event.relative.x * MOUSE_SENSI)
 		LOOK_ROT.x = clamp(LOOK_ROT.x, MIN_ANGLE, MAX_ANGLE)
 
+func set_audio_to_play(value,play: bool):
+	STREAM.stream = value
+	print(STREAM.stream)
+	if play == true:
+		STREAM.play()
+
+func play_audio():
+	STREAM.play()
+
+func reset_audio():
+	STREAM.stop()
+	STREAM.stream = null
 
 func _on_StateMachine_transitioned(state_name, old_state):
 	print("Player is on " + state_name + " Player old state is " + old_state)
+
+
+func _on_LifeComp_is_dead():
+	STATE_MACHINE.change_state("Dead")

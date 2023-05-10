@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/components/life_comp.gd" type="Script" id=1]
+[ext_resource path="res://entities/player/sounds/hitten_flesh (3).wav" type="AudioStream" id=2]
+[ext_resource path="res://entities/player/sounds/hitten_flesh (1).wav" type="AudioStream" id=3]
+[ext_resource path="res://entities/player/sounds/hitten_flesh (2).wav" type="AudioStream" id=4]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=5]
 
 [node name="LifeComp" type="Spatial"]
 script = ExtResource( 1 )
+
+[node name="RandomAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+script = ExtResource( 5 )
+samples = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ) ]
+random_volume_range = 0

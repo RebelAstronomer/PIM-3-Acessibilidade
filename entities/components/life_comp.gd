@@ -6,6 +6,8 @@ signal is_dead
 # Sinal de quando toma algum dano
 signal is_hitted
 
+onready var STREAM: AudioStreamPlayer3D = $RandomAudioStreamPlayer3D
+
 ## Vida máxima/inicial
 export var MAX_HP: float
 
@@ -32,6 +34,7 @@ func take_damage(value: float):
 	# Checando se ainda tem vida pra ser removida
 	if actHp > 0:
 		actHp -= value
+		STREAM.play()
 		emit_signal("is_hitted")
 	else:
 		emit_signal("is_dead")
