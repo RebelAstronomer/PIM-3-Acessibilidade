@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/components/hurt_box.gd" type="Script" id=1]
+
+[node name="HurtBox" type="Area"]
+script = ExtResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_HurtBox_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_HurtBox_body_entered"]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/door_open_interact.gd" type="Script" id=1]
 [ext_resource path="res://items/interactive_body.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/sounds/doors/open_door1.wav" type="AudioStream" id=3]
+[ext_resource path="res://objects/sounds/doors/open_door0.wav" type="AudioStream" id=4]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_3D.gd" type="Script" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 5, 0.323 )
@@ -83,6 +86,20 @@ tracks/2/keys = {
 "method": "change_anim_name_open"
 } ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "open"
@@ -123,6 +140,20 @@ tracks/2/keys = {
 "values": [ {
 "args": [  ],
 "method": "change_anim_name_closed"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_sound"
 } ]
 }
 
@@ -181,6 +212,14 @@ shape = SubResource( 7 )
 anims/RESET = SubResource( 3 )
 anims/close = SubResource( 6 )
 anims/open = SubResource( 4 )
+
+[node name="RandomAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84519, 0 )
+unit_db = 5.0
+script = ExtResource( 5 )
+samples = [ ExtResource( 4 ), ExtResource( 3 ) ]
+random_volume_range = 1.0
+random_pitch_range = 0
 
 [connection signal="interacted" from="left/interactive_body" to="." method="_on_interactive_body_interacted"]
 [connection signal="interacted" from="right/interactive_body2" to="." method="_on_interactive_body_interacted"]

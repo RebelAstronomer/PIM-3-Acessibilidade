@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/components/vision_area.gd" type="Script" id=1]
+
+[node name="VisionArea" type="Area"]
+script = ExtResource( 1 )
+
+[node name="VisionTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="VisionTimer" to="." method="_on_VisionTimer_timeout"]

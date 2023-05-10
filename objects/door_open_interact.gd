@@ -1,11 +1,14 @@
 extends Door
 
 onready var ANIMATION: AnimationPlayer = $AnimationPlayer
+onready var STREAM: AudioStreamPlayer3D = $RandomAudioStreamPlayer3D
+
+func _ready():
+	randomize()
 
 func active():
 	# Abrindo ou fechando a porta
 	OPEN = !OPEN
-	
 	# Checando se pode abrir ou fechar a porta
 	if OPEN == true and FULL_OPEN == true:
 		ANIMATION.play(ANIMATION_NAME)
@@ -16,6 +19,9 @@ func active():
 
 func _on_interactive_body_interacted(body):
 	active()
+
+func play_sound():
+	STREAM.play()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	FULL_OPEN = true

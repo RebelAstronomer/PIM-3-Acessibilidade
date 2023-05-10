@@ -1,4 +1,5 @@
 extends Area
+class_name TraumaArea
 
 export var TRAUMA_AMMOUNT: float = 0.1
 
@@ -11,5 +12,5 @@ func cause_trauma():
 			area.add_trauma(TRAUMA_AMMOUNT)
 
 # Checando se o jogador foi acertado e tremendo a camera
-func _on_Player_player_hitted():
+func _on_LifeComp_is_hitted():
 	cause_trauma()

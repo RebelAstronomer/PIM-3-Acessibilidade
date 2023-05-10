@@ -12,9 +12,6 @@ export var JUMP_FORCE: float = 15
 export var GRAVITY: float = 50
 export var MOUSE_SENSI: float = 0.2
 
-# SINAIS #
-signal player_hitted
-
 # COMPONENTES # 
 onready var HEAD: Spatial = $Head
 onready var CAMERA: Camera = $Head/PlayerCamera/Camera
@@ -40,10 +37,12 @@ var INTERACT_WITH
 
 var SHOW_MOUSE: bool = false
 
+func _init():
+	Globals.PLAYER = self
+
 func _ready():
 	# Desabilitando o mouse na tela
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	Globals.PLAYER = self
 
 func _process(delta):
 	# Limitadores #
@@ -54,10 +53,6 @@ func _input(event):
 	# Fechando o game
 	if Input.is_action_just_pressed("quit_game"):
 		get_tree().quit()
-	
-	# Tremendo a camera
-	if Input.is_action_just_pressed("shake_camera"):
-		emit_signal("player_hitted")
 	
 	# Resetando a cena
 	if Input.is_action_just_pressed("restart"):
@@ -116,10 +111,6 @@ func player_mouse_input(event):
 		LOOK_ROT.x -= (event.relative.y * MOUSE_SENSI)
 		LOOK_ROT.y -= (event.relative.x * MOUSE_SENSI)
 		LOOK_ROT.x = clamp(LOOK_ROT.x, MIN_ANGLE, MAX_ANGLE)
-
-# Função para checar dano
-func player_hitted():
-	emit_signal("player_hitted")
 
 
 func _on_StateMachine_transitioned(state_name, old_state):

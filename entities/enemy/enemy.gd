@@ -1,34 +1,24 @@
 extends KinematicBody
+class_name Enemy
 
+# Velocidade de movimento
 export var SPEED = 5
+# Node para a navegação
+export(NodePath) onready var NAV_COMP = get_node(NAV_COMP)
 
-var PATH := []
-var curPathIndex := 0
-var target = null
-var velocity := Vector3.ZERO
-var threshold := .1
+onready var PATH_FINDER := $PathFinderComp
 
-onready var nav = get_parent()
+var velocity: Vector3 = Vector3.ZERO
+var direction: Vector3 = Vector3.FORWARD
 
 func _ready():
-	target = Globals.PLAYER
+	PATH_FINDER.NAV_COMP = NAV_COMP
 
-func _physics_process(delta):
-	if PATH.size() > 0:
-		move_to_target()
-	
+# Função para mover o inimigo
+func enemy_move_towards_direction(dir: Vector3, delta):
+	velocity = dir.normalized() * SPEED
+	move_and_slide(velocity, delta * Vector3.UP)
 
-func move_to_target():
-	if global_transform.origin.distance_to(PATH[curPathIndex]) < threshold:
-		PATH.remove(0)
-	else:
-		var direction = PATH[curPathIndex] - global_transform.origin
-		velocity = direction.normalized() * SPEED
-		move_and_slide(velocity, Vector3.UP)
-
-func get_target_path(target_pos):
-	PATH = nav.get_simple_path(global_transform.origin, target_pos)
-	curPathIndex = 0
-
-func _on_PathfinderTimer_timeout():
-	get_target_path(target.global_transform.origin)
+func enemy_look_at(target: Vector3, delta: float):
+	rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 4.0)
+	$Body/Head.look_at(target,Vector3.UP)

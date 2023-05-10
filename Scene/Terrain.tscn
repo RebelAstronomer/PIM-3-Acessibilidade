@@ -173,6 +173,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 238, 28, 47 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 232.007, 28.3045, 47.0519 )
 
 [node name="HTerrain_FullMesh" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+visible = false
 mesh = SubResource( 7 )
 
 [node name="Enemy" parent="Navigation" instance=ExtResource( 22 )]

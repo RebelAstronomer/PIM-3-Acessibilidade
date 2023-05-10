@@ -1,6 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/enemy/enemy.gd" type="Script" id=1]
+[ext_resource path="res://entities/components/damage_area.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/classes/state_machine.gd" type="Script" id=3]
+[ext_resource path="res://entities/enemy/States/enemy_idle.gd" type="Script" id=4]
+[ext_resource path="res://entities/components/pathfinder_comp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/components/VisionArea.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/enemy/States/enemy_chase.gd" type="Script" id=7]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -8,22 +14,72 @@ albedo_color = Color( 1, 0, 0, 1 )
 [sub_resource type="CapsuleMesh" id=2]
 material = SubResource( 1 )
 
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 0.5, 0.5, 0.5 )
+
 [sub_resource type="CapsuleShape" id=3]
 
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 5.939, 5.72911, 13.0426 )
+
+[sub_resource type="CapsuleShape" id=4]
+
 [node name="Enemy" type="KinematicBody"]
-collision_layer = 8
-collision_mask = 2
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.51084, 0 )
+[node name="Body" type="MeshInstance" parent="."]
+transform = Transform( 0.594512, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.51084, 0 )
 mesh = SubResource( 2 )
+
+[node name="Head" type="MeshInstance" parent="Body"]
+transform = Transform( 1.68205, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12644, -0.904193 )
+mesh = SubResource( 8 )
+skeleton = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.54188, 0 )
 shape = SubResource( 3 )
 
-[node name="PathfinderTimer" type="Timer" parent="."]
-autostart = true
+[node name="PathFinderComp" parent="." instance=ExtResource( 5 )]
 
-[connection signal="timeout" from="PathfinderTimer" to="." method="_on_PathfinderTimer_timeout"]
+[node name="VisionArea" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.89478e-14, 0, 1.89478e-14, 1, -0.0429998, 2.41503, -1.12644 )
+collision_layer = 8
+collision_mask = 3
+RAY_CAST = NodePath("RayCast")
+
+[node name="CollisionShape" type="CollisionShape" parent="VisionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.2374 )
+shape = SubResource( 7 )
+
+[node name="RayCast" type="RayCast" parent="VisionArea"]
+enabled = true
+cast_to = Vector3( 0, 0, -21 )
+collision_mask = 3
+debug_shape_custom_color = Color( 0, 1, 0.0862745, 1 )
+
+[node name="DamageArea" parent="." instance=ExtResource( 2 )]
+collision_layer = 8
+collision_mask = 2
+DAMAGE = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="DamageArea"]
+transform = Transform( 1.3, 0, 0, 0, -5.68248e-08, -1.3, 0, 1.3, -5.68248e-08, 0, 1.546, -0.792463 )
+shape = SubResource( 4 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+INIT_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+PATH_FINDER = NodePath("../../PathFinderComp")
+VISION_AREA = NodePath("../../VisionArea")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+PATH_FINDER = NodePath("../../PathFinderComp")
+VISION_AREA = NodePath("../../VisionArea")

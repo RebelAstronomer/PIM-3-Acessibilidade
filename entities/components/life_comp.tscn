@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/components/life_comp.gd" type="Script" id=1]
+
+[node name="LifeComp" type="Spatial"]
+script = ExtResource( 1 )
