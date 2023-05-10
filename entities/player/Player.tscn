@@ -142,6 +142,7 @@ script = ExtResource( 9 )
 script = ExtResource( 15 )
 
 [connection signal="is_dead" from="LifeComp" to="." method="_on_LifeComp_is_dead"]
+[connection signal="is_hitted" from="LifeComp" to="." method="_on_LifeComp_is_hitted"]
 [connection signal="is_hitted" from="LifeComp" to="Head/trauma_area" method="_on_LifeComp_is_hitted"]
 [connection signal="timeout" from="StaminaCountDown" to="StateMachine/Free" method="_on_StaminaCountDown_timeout"]
 [connection signal="transitioned" from="StateMachine" to="." method="_on_StateMachine_transitioned"]

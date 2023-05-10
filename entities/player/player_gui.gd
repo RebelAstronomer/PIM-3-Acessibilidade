@@ -3,9 +3,11 @@ extends Control
 # COMPONENTES #
 onready var STAMINA_BAR: ProgressBar = $StaminaBar
 onready var INTERACTION_BAR: ProgressBar = $ActionBar
+onready var VIGNETTE: ColorRect = $Vignette/ColorRect
 
 # Variavel para salvar o node do jogador
 var PLAYER: Player
+var isHurt: bool = false
 
 func _ready():
 	# Checando se o jogador já foi instanciado para carregar as informações
@@ -27,3 +29,18 @@ func _process(delta):
 	
 	# PASSANDO VALORES #
 	STAMINA_BAR.value = PLAYER.STAMINA
+
+func change_vignette_color(newColor: Color):
+	VIGNETTE.material.set_shader_param("vignette_rgb", newColor)
+
+func set_hurt(value: bool):
+	isHurt = value
+
+func vignette_hurt_effect():
+	$Vignette/vignette_anim.play("blick_hurt")
+
+func vignette_death_effect():
+	$Vignette/vignette_anim.play("dead")
+
+func resete_vignette():
+	$Vignette/vignette_anim.play("RESET")

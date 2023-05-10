@@ -44,6 +44,9 @@ func _init():
 func _ready():
 	# Desabilitando o mouse na tela
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Resetando a vinheta após a morte
+	HUD.resete_vignette()
 
 func _process(delta):
 	# Limitadores #
@@ -129,6 +132,11 @@ func reset_audio():
 func _on_StateMachine_transitioned(state_name, old_state):
 	print("Player is on " + state_name + " Player old state is " + old_state)
 
-
+# Tela de morte
 func _on_LifeComp_is_dead():
 	STATE_MACHINE.change_state("Dead")
+	HUD.vignette_death_effect()
+
+# Recebendo dano
+func _on_LifeComp_is_hitted():
+	HUD.vignette_hurt_effect()
