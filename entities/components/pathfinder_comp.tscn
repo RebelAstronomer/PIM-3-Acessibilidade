@@ -5,7 +5,10 @@
 [node name="PathFinderComp" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MoveRandomTimer" type="Timer" parent="."]
+
+[node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 0.25
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="MoveRandomTimer" to="." method="_on_MoveRandomTimer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_ChaseTimer_timeout"]

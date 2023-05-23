@@ -22,3 +22,7 @@ func enemy_move_towards_direction(dir: Vector3, delta):
 func enemy_look_at(target: Vector3, delta: float):
 	rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 4.0)
 	$Body/Head.look_at(target,Vector3.UP)
+
+func get_translation() -> Vector3:
+	return global_translation
+

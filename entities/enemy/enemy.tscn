@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://entities/components/damage_area.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://entities/components/pathfinder_comp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/components/VisionArea.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/enemy/States/enemy_chase.gd" type="Script" id=7]
+[ext_resource path="res://entities/enemy/States/enemy_alert.gd" type="Script" id=8]
+[ext_resource path="res://entities/enemy/States/enemy_move.gd" type="Script" id=9]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -79,7 +81,24 @@ script = ExtResource( 4 )
 PATH_FINDER = NodePath("../../PathFinderComp")
 VISION_AREA = NodePath("../../VisionArea")
 
+[node name="ChooseActionTimer" type="Timer" parent="StateMachine/Idle"]
+
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
 PATH_FINDER = NodePath("../../PathFinderComp")
 VISION_AREA = NodePath("../../VisionArea")
+
+[node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+PATH_FINDER = NodePath("../../PathFinderComp")
+VISION_AREA = NodePath("../../VisionArea")
+
+[node name="AlertCooldown" type="Timer" parent="StateMachine/Alert"]
+
+[node name="MoveRandom" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+PATH_FINDER = NodePath("../../PathFinderComp")
+VISION_AREA = NodePath("../../VisionArea")
+
+[connection signal="timeout" from="StateMachine/Idle/ChooseActionTimer" to="StateMachine/Idle" method="_on_ChooseActionTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Alert/AlertCooldown" to="StateMachine/Alert" method="_on_AlertCooldown_timeout"]
