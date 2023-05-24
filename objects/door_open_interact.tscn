@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/door_open_interact.gd" type="Script" id=1]
 [ext_resource path="res://items/interactive_body.tscn" type="PackedScene" id=2]
@@ -9,11 +9,17 @@
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 5, 0.323 )
 
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.45098, 0.45098, 0.45098, 1 )
+
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 1, 2.472, 0.178 )
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 1, 2.472, 0.178 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.45098, 0.45098, 0.45098, 1 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 1, 2.472, 0.178 )
@@ -170,6 +176,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99007, 2.50656, 0 )
 mesh = SubResource( 1 )
 skeleton = NodePath("../../..")
+material/0 = SubResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="left/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.982631, 2.52641, 0 )
@@ -194,6 +201,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99007, 2.50656, 0 )
 mesh = SubResource( 1 )
 skeleton = NodePath("../../../left")
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="right/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.982631, 2.52641, 0 )

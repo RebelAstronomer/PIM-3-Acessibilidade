@@ -17,6 +17,8 @@ func _process(delta):
 					ANIMATION.playback_speed = 1
 			"Tired":
 				ANIMATION.playback_speed = 0.3
+			"Dead":
+				ANIMATION.stop()
 		
 		# Animação
 		ANIMATION.play("walking_shake")

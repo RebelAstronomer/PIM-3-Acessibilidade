@@ -20,6 +20,8 @@ onready var STATE_MACHINE: StateMachine = $StateMachine
 onready var STAMINA_TIMER: Timer = $StaminaCountDown
 onready var HUD: Control = $HUD
 onready var STREAM: AudioStreamPlayer3D = $Head/AudioStreamPlayer3D
+onready var ITEMS_HAND: Position3D = $Head/itemPos
+onready var ANIMATION: AnimationPlayer = $AnimationPlayer
 
 # VARIAVEIS #
 var LOOK_ROT: Vector3 = Vector3.ZERO
@@ -35,6 +37,7 @@ var CAN_RUN: bool = true
 var SPEED: float
 var ACT_STATE: String
 var INTERACT_WITH
+var ITEM_IN_HAND: Object = null
 
 var SHOW_MOUSE: bool = false
 
@@ -52,6 +55,10 @@ func _process(delta):
 	# Limitadores #
 	STAMINA = clamp(STAMINA, 0, MAX_STAMINA)
 	
+	# Pegando a chave
+	if ITEM_IN_HAND != null:
+		ITEM_IN_HAND.global_transform = ITEMS_HAND.global_transform
+	
 
 func _input(event):
 	# Fechando o game
@@ -62,6 +69,9 @@ func _input(event):
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
 	
+	if Input.is_action_just_pressed("drop") and ITEM_IN_HAND != null:
+		remove_key_from_head(false)
+	
 	# Mostrando o mouse
 	if Input.is_action_just_pressed("show_mouse"):
 		SHOW_MOUSE = !SHOW_MOUSE
@@ -71,6 +81,15 @@ func _input(event):
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+# Removendo a chave da mão
+func remove_key_from_head(destroy: bool):
+	if ITEM_IN_HAND != null:
+		if destroy == false:
+			ITEM_IN_HAND.reset_origin()
+			ITEM_IN_HAND = null
+		else:
+			ITEM_IN_HAND.queue_free()
+			ITEM_IN_HAND = null
 
 # Movimentação do jogador
 func player_movimentation(_delta: float):

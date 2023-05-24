@@ -15,10 +15,10 @@ func apply_damage(value: float):
 		print(str(owner) + " dont have a Life Compente to resive damage")
 
 func _on_HurtBox_body_entered(body):
-	if body.get("DAMAGE") != null:
+	if body.get("DAMAGE") != null and owner.ACT_STATE != "Dead":
 		apply_damage(body.DAMAGE)
 
 
 func _on_HurtBox_area_entered(area):
-	if area.get("DAMAGE") != null:
+	if area.get("DAMAGE") != null and owner.ACT_STATE != "Dead":
 		apply_damage(area.DAMAGE)

@@ -104,7 +104,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "dead"
-length = 2.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:material:shader_param/vignette_rgb")
 tracks/0/interp = 1
@@ -112,7 +112,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 3.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 0, 0, 1 ) ]
@@ -124,7 +124,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.4, 2.945 ]
@@ -136,7 +136,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.5, 1.0 ]

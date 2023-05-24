@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/classes/state_machine.gd" type="Script" id=2]
@@ -35,6 +35,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector3( 0.369361, -0.732229, -1.35696 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.282058, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("lanter:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "walking_shake"
@@ -57,6 +81,85 @@ tracks/0/keys = {
 
 [sub_resource type="CapsuleMesh" id=2]
 mid_height = 2.0
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.282058, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/lanter_pos:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.369361, -0.732229, -1.35696 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head/itemPos:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.565, -0.612, -1.357 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "death"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.282058, 0 ), Vector3( 0, -2.18529, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Head/lanter_pos:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.369361, -0.732229, -1.35696 ), Vector3( 0.369361, -1.97408, -1.35696 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Head/itemPos:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.565, -0.612, -1.357 ), Vector3( -0.565, -2.34406, -1.357 ) ]
+}
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65143, 0 )
@@ -84,6 +187,9 @@ TRAUMA_AMMOUNT = 1.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Head/trauma_area"]
 shape = SubResource( 3 )
+
+[node name="itemPos" type="Position3D" parent="Head"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.565, -0.612, -1.357 )
 
 [node name="lanter_pos" type="Position3D" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.369361, -0.732229, -1.35696 )
@@ -140,6 +246,10 @@ script = ExtResource( 9 )
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/death = SubResource( 8 )
 
 [connection signal="is_dead" from="LifeComp" to="." method="_on_LifeComp_is_dead"]
 [connection signal="is_hitted" from="LifeComp" to="." method="_on_LifeComp_is_hitted"]

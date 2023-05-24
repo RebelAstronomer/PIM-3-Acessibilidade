@@ -17,11 +17,12 @@
 [ext_resource path="res://Terrain/data.hterrain" type="Resource" id=15]
 [ext_resource path="res://items/Pages/page.tscn" type="PackedScene" id=16]
 [ext_resource path="res://items/lever.tscn" type="PackedScene" id=17]
-[ext_resource path="res://objects/door_open_lever.tscn" type="PackedScene" id=18]
+[ext_resource path="res://objects/door_open_key.tscn" type="PackedScene" id=18]
 [ext_resource path="res://objects/door_open_interact.tscn" type="PackedScene" id=19]
 [ext_resource path="res://objects/torch_wall/torch_wall.tscn" type="PackedScene" id=20]
 [ext_resource path="res://objects/torch_on_ground/torch_on_ground.tscn" type="PackedScene" id=21]
 [ext_resource path="res://entities/enemy/enemy.tscn" type="PackedScene" id=22]
+
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.184314, 0.176471, 0.309804, 1 )
