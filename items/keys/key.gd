@@ -3,10 +3,11 @@ class_name Key
 
 export var KEY_NAME: String = ""
 export var KEY_SIGN: Texture
+export var KEY_COLOR: Color
 
 onready var highlighterMesh: MeshInstance = $highlighterMesh
 onready var interactBody: StaticBody = $interactive_body
-onready var sprite: Sprite3D = $MeshInstance/Sprite3D
+onready var sprite: Sprite3D = $KeyMesh/Sprite3D
 onready var STREAM: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 # Variaveis para salvar a posição inicial na fase
@@ -27,6 +28,7 @@ func _ready():
 	interactBody.PROMPT_MESSAGE = keyFinalName
 	
 	sprite.texture = KEY_SIGN
+	print($KeyMesh/SignBackColor)
 
 # Sendo pego
 func _on_interactive_body_interacted(body):
