@@ -85,7 +85,7 @@ func _input(event):
 func remove_key_from_head(destroy: bool):
 	if ITEM_IN_HAND != null:
 		if destroy == false:
-			ITEM_IN_HAND.reset_origin()
+			ITEM_IN_HAND.drop_down()
 			ITEM_IN_HAND = null
 		else:
 			ITEM_IN_HAND.queue_free()

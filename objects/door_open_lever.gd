@@ -7,6 +7,7 @@ export var SIGN_COLOR: Color
 onready var ANIMATION: AnimationPlayer = $AnimationPlayer
 onready var SIGN: Sprite3D = $right/Sprite3D
 onready var STREAM: AudioStreamPlayer3D = $RandomAudioStreamPlayer3D
+onready var UNLOCK_STREAM: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 func _ready():
 	randomize()
@@ -14,11 +15,21 @@ func _ready():
 	SIGN.modulate = SIGN_COLOR
 
 func active():
+	alarm_the_enemy()
+	
+	UNLOCK_STREAM.play()
+	play_sound()
 	ANIMATION.play(ANIMATION_NAME)
 
 func play_sound():
 	STREAM.play()
 
+# Chase de alarmar o inimigo
+func alarm_the_enemy():
+	var percent = randf()
+	print(percent)
+	if percent > 0.8:
+		Globals.ENEMY.chage_player_now()
 
 func _on_interactive_body_interacted(body):
 	if Globals.PLAYER.ITEM_IN_HAND == DOOR_KEY:

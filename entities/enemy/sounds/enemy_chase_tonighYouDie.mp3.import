@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enemy_chase_tonighYouDie.mp3-cf61ac53b9a779f2fbc6824ad93bb7d6.mp3str"
+
+[deps]
+
+source_file="res://entities/enemy/sounds/enemy_chase_tonighYouDie.mp3"
+dest_files=[ "res://.import/enemy_chase_tonighYouDie.mp3-cf61ac53b9a779f2fbc6824ad93bb7d6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

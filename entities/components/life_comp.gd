@@ -7,6 +7,7 @@ signal is_dead
 signal is_hitted
 
 onready var STREAM: AudioStreamPlayer3D = $RandomAudioStreamPlayer3D
+onready var BLOOD_DROPS := preload("res://entities/components/blood_drops.tscn")
 
 ## Vida máxima/inicial
 export var MAX_HP: float
@@ -22,11 +23,6 @@ func _ready():
 func _process(delta):
 	# Limitando o HP para que não passe do máximo de HP predefinido
 	limite_hp()
-
-func _input(event):
-		# Tremendo a camera
-	if Input.is_action_just_pressed("take_hit"):
-		take_damage(1)
 
 # Funçõa para receber e gerenciar o dano
 func take_damage(value: float):
@@ -59,3 +55,7 @@ func set_max_hp(value: float):
 
 func get_max_hp():
 	return MAX_HP
+
+func create_blood_drops():
+	var drops = BLOOD_DROPS.instance() as RigidBody
+	self.add_child(drops)

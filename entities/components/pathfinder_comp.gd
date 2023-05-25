@@ -68,13 +68,18 @@ func get_random_point(radius: float) -> Vector3:
 	
 	return randomPos * rand_range(0, radius)
  
-
-func _on_ChaseTimer_timeout():
+func chasing_the_player():
 	targetToFollow = Vector3(Globals.get_player_position().x,Globals.get_player_position().y,Globals.get_player_position().z)
 	move_to(targetToFollow)
 
-func _on_MoveRandomTimer_timeout():
+func random_moviment():
 	TIMER_RAND.wait_time = rand_range(TIMER_TO_WAIT, 5)
 	TIMER_RAND.stop()
 	targetToFollow = Vector3(get_random_point(20).x,0,get_random_point(20).z) + owner.global_transform.origin
 	move_to(targetToFollow)
+
+func _on_ChaseTimer_timeout():
+	chasing_the_player()
+
+func _on_MoveRandomTimer_timeout():
+	random_moviment()

@@ -19,7 +19,8 @@ func _update(_delta: float) -> void:
 	ENEMY.enemy_look_at(PATH_FINDER.get_target_position(), _delta)
 
 func _on_VisionArea_see_the_target():
-	STATE_MACHINE.change_state("Chase")
+	if STATE_MACHINE.STATE == self:
+		STATE_MACHINE.change_state("Chase")
 
 func _exit() -> void:
 	# Parando o pathfinder

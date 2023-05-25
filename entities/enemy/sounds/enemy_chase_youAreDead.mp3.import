@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enemy_chase_youAreDead.mp3-5657ce061a248de6d8caa7b2ce748bbc.mp3str"
+
+[deps]
+
+source_file="res://entities/enemy/sounds/enemy_chase_youAreDead.mp3"
+dest_files=[ "res://.import/enemy_chase_youAreDead.mp3-5657ce061a248de6d8caa7b2ce748bbc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
