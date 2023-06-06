@@ -246,6 +246,7 @@ drop={
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="TraumaArea"
 3d_physics/layer_6="Effects"
+3d_physics/layer_7="Doors"
 3d_navigation/layer_1="World"
 3d_navigation/layer_2="Player"
 3d_navigation/layer_3="Items"

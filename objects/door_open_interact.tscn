@@ -171,6 +171,7 @@ ANIMATION_NAME = "open"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="left"]
+collision_layer = 64
 
 [node name="MeshInstance" type="MeshInstance" parent="left/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99007, 2.50656, 0 )
@@ -196,6 +197,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="right"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+collision_layer = 64
 
 [node name="MeshInstance" type="MeshInstance" parent="right/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99007, 2.50656, 0 )
