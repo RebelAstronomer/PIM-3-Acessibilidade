@@ -4,10 +4,14 @@ extends Control
 onready var STAMINA_BAR: ProgressBar = $StaminaBar
 onready var INTERACTION_BAR: ProgressBar = $ActionBar
 onready var VIGNETTE: ColorRect = $Vignette/ColorRect
+onready var GUN_PARTS_COUNT: Label = $GunsParts
 
 # Variavel para salvar o node do jogador
 var PLAYER: Player
 var isHurt: bool = false
+
+func _init():
+	Globals.HUD = self
 
 func _ready():
 	# Checando se o jogador já foi instanciado para carregar as informações
@@ -29,6 +33,9 @@ func _process(delta):
 	
 	# PASSANDO VALORES #
 	STAMINA_BAR.value = PLAYER.STAMINA
+
+func change_gun_parts_count(value):
+	GUN_PARTS_COUNT.text = 'Partes: ' + str(value) + "/4"
 
 func change_vignette_color(newColor: Color):
 	VIGNETTE.material.set_shader_param("vignette_rgb", newColor)

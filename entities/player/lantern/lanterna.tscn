@@ -8,5 +8,6 @@
 transform = Transform( 1, 0, 0, 0, -0.558883, -0.829247, 0, 0.829247, -0.558883, 0, 3.48815, 0 )
 
 [node name="OmniLight" type="OmniLight" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94234, 0 )
 light_color = Color( 1, 0.839216, 0.556863, 1 )
-omni_range = 10.0
+omni_range = 9.99051

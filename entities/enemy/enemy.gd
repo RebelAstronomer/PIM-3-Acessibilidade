@@ -5,6 +5,8 @@ class_name Enemy
 export var SPEED = 5
 # Node para a navegação
 export(NodePath) onready var NAV_COMP = get_node(NAV_COMP)
+# Vida do inimigo
+export var HP: int = 5
 
 onready var PATH_FINDER := $PathFinderComp
 onready var STREAM: AudioStreamPlayer3D = $AudioStreamPlayer3D
@@ -38,3 +40,8 @@ func play_sound(snd):
 func get_translation() -> Vector3:
 	return global_translation
 
+func take_damage(value: int):
+	HP -= value
+	
+	if HP <= 0:
+		$StateMachine.change_state("Dead")

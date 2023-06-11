@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://items/Pages/page.gd" type="Script" id=1]
 [ext_resource path="res://items/Pages/page_hud_texture.jpeg" type="Texture" id=2]
 [ext_resource path="res://items/interactive_body.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shaders/item_highlighter.gdshader" type="Shader" id=4]
 [ext_resource path="res://items/Pages/page_snd.wav" type="AudioStream" id=5]
 
 [sub_resource type="SpatialMaterial" id=3]
@@ -11,6 +12,13 @@ albedo_color = Color( 0.494118, 0.494118, 0.494118, 1 )
 [sub_resource type="CubeMesh" id=1]
 material = SubResource( 3 )
 size = Vector3( 1, 0.043, 1 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 4 )
+shader_param/shine_color = Color( 1, 1, 1, 1 )
+shader_param/cycle_interval = 1.0
+shader_param/shine_speed = 3.0
+shader_param/shine_width = 65.733
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.548, 0.061, 0.535 )
@@ -23,6 +31,10 @@ PAGE_TEXT = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
 
 [node name="interactive_body" parent="." instance=ExtResource( 3 )]
 PROMPT_MESSAGE = "Pegar página"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/classes/state_machine.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://entities/components/life_comp.tscn" type="PackedScene" id=13]
 [ext_resource path="res://entities/components/hurt_box.tscn" type="PackedScene" id=14]
 [ext_resource path="res://entities/player/States/player_dead.gd" type="Script" id=15]
+[ext_resource path="res://items/revolver/revolver.tscn" type="PackedScene" id=16]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
@@ -169,7 +170,7 @@ collision_mask = 16
 [node name="interactCast" type="RayCast" parent="Head"]
 enabled = true
 cast_to = Vector3( 0, 0, -4 )
-collision_mask = 5
+collision_mask = 77
 collide_with_areas = true
 script = ExtResource( 8 )
 
@@ -183,6 +184,11 @@ shape = SubResource( 3 )
 
 [node name="itemPos" type="Position3D" parent="Head"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.565, -0.612, -1.357 )
+
+[node name="revolver" parent="Head/itemPos" instance=ExtResource( 16 )]
+transform = Transform( -0.0309888, -1.4468e-08, 0.298395, -0.298395, -1.30433e-08, -0.0309888, 1.4468e-08, -0.3, -1.30433e-08, -0.403269, 1.19209e-07, 0.106138 )
+visible = false
+RAYCAST = NodePath("../../interactCast")
 
 [node name="lanter_pos" type="Position3D" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.369361, -0.732229, -1.35696 )

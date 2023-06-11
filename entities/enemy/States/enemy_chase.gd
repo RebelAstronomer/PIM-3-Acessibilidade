@@ -2,6 +2,7 @@ extends EnemyState
 
 export(NodePath) onready var PATH_FINDER = get_node(PATH_FINDER)
 export(NodePath) onready var VISION_AREA = get_node(VISION_AREA)
+export(NodePath) onready var DAMAGE_AREA = get_node(DAMAGE_AREA)
 
 var TARGET: Player = Globals.PLAYER
 var targetInArea: bool = true
@@ -32,6 +33,9 @@ func _enter(_msg := {}) -> void:
 	
 	# Ativando o timer para que possa andar
 	PATH_FINDER.start_chase_player()
+	
+	# Ativando a area de dano
+	DAMAGE_AREA.monitoring = true
 
 func _update(_delta: float) -> void:
 	# Olhando para o alvo
@@ -48,6 +52,8 @@ func _on_VisionArea_lost_the_target():
 func _exit() -> void:
 	# Parando o pathfinder
 	PATH_FINDER.stop_chase_player()
+	# Desativando a area de dano
+	DAMAGE_AREA.monitoring = false
 
 func play_random_chase_sound():
 	var index = rand_range(0,chaseSounds.size())

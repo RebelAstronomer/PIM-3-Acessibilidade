@@ -218,6 +218,14 @@ margin_top = -14.0
 text = "Aperte F1 para recomeçar"
 align = 1
 
+[node name="GunsParts" type="Label" parent="."]
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 48.0
+margin_right = 80.0
+margin_bottom = -86.0
+text = "Partes: 0/4"
+
 [node name="StaminaBar" type="ProgressBar" parent="."]
 margin_left = 64.0
 margin_top = 536.0

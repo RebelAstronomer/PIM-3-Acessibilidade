@@ -22,6 +22,7 @@ onready var HUD: Control = $HUD
 onready var STREAM: AudioStreamPlayer3D = $Head/AudioStreamPlayer3D
 onready var ITEMS_HAND: Position3D = $Head/itemPos
 onready var ANIMATION: AnimationPlayer = $AnimationPlayer
+onready var GUN: Spatial = $Head/itemPos/revolver
 
 # VARIAVEIS #
 var LOOK_ROT: Vector3 = Vector3.ZERO
@@ -38,6 +39,7 @@ var SPEED: float
 var ACT_STATE: String
 var INTERACT_WITH
 var ITEM_IN_HAND: Object = null
+var HAS_A_GUN: bool = false
 
 var SHOW_MOUSE: bool = false
 
@@ -91,6 +93,10 @@ func remove_key_from_head(destroy: bool):
 			ITEM_IN_HAND.queue_free()
 			ITEM_IN_HAND = null
 
+func active_gun_controlls():
+	if Input.is_action_just_pressed("shoot") and GUN.canShoot == true:
+		GUN.shoot()
+
 # Movimentação do jogador
 func player_movimentation(_delta: float):
 	# Rotacionando a camera
@@ -99,6 +105,9 @@ func player_movimentation(_delta: float):
 	# Ficando cansado
 	if STAMINA <= 0:
 		STATE_MACHINE.change_state("Tired")
+	
+	if HAS_A_GUN == true:
+		active_gun_controlls()
 	
 	# Grvidade
 	if not is_on_floor():
