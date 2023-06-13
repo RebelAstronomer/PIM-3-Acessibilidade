@@ -38,6 +38,7 @@ transform = Transform( 0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0
 
 [node name="SignBackColor" type="MeshInstance" parent="KeyMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0140607, -1.83433 )
+visible = false
 mesh = ExtResource( 6 )
 material/0 = ExtResource( 5 )
 

@@ -139,6 +139,7 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.04551, 3.52345, 0.164
 
 [node name="SignColor" type="MeshInstance" parent="right"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -1.04551, 3.52345, 0.163492 )
+visible = false
 mesh = SubResource( 8 )
 material/0 = SubResource( 9 )
 
